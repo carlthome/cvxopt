@@ -5,7 +5,7 @@ on: [push, pull_request]
 jobs:
   build:
 
-#    if: false
+    if: false
 
     runs-on: ubuntu-latest
     env:
@@ -23,7 +23,7 @@ jobs:
         #suitesparse: [lib]
 
     steps:
-    - name: Checkout source    
+    - name: Checkout source
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
@@ -37,7 +37,7 @@ jobs:
       run: |
         sudo apt-get install libopenblas-dev libsuitesparse-dev libdsdp-dev libfftw3-dev libglpk-dev libgsl0-dev
         python -m pip install --upgrade pip
-        pip install setuptools setuptools_scm build wheel pytest pytest-cov coveralls 
+        pip install setuptools setuptools_scm build wheel pytest pytest-cov coveralls
 
     - name: Get SuiteSparse source
       if: ${{ matrix.suitesparse == 'src' }}

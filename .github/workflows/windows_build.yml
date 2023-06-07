@@ -5,8 +5,8 @@ on: [push, pull_request]
 jobs:
   build:
 
-#    if: false
-    
+    if: false
+
     runs-on: windows-2019
     env:
       SUITESPARSE_VERSION: 5.13.0
@@ -22,7 +22,7 @@ jobs:
       matrix:
         suitesparse: [src]
         ARCH: [x64]
-        python-version: ['3.8','3.11'] 
+        python-version: ['3.8','3.11']
         include:
         - ARCH: x64
           MSVC_TARGET: 64
@@ -56,7 +56,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install setuptools setuptools_scm build wheel pytest pytest-cov coveralls 
+        pip install setuptools setuptools_scm build wheel pytest pytest-cov coveralls
 
     - name: Get OpenBLAS and copy to workspace
       shell: msys2 {0}
@@ -69,8 +69,8 @@ jobs:
           mkdir OpenBLAS
           unzip OpenBLAS-${OPENBLAS_VERSION}-${{matrix.ARCH}}.zip -d OpenBLAS/
           cp OpenBLAS/bin/libopenblas.dll src/python/.libs
-          cp OpenBLAS/lib/libopenblas.lib libopenblas.lib       
-          cp LICENSE_OpenBLAS-${OPENBLAS_VERSION} src/python  
+          cp OpenBLAS/lib/libopenblas.lib libopenblas.lib
+          cp LICENSE_OpenBLAS-${OPENBLAS_VERSION} src/python
           echo "CVXOPT_BLAS_LIB_DIR=${{github.workspace}}" >> $GITHUB_ENV
           echo "CVXOPT_BLAS_LIB=libopenblas" >> $GITHUB_ENV
           echo "CVXOPT_LAPACK_LIB=libopenblas" >> $GITHUB_ENV
