@@ -48,7 +48,7 @@ jobs:
     - name: Build wheels
       run: python -m cibuildwheel --output-dir wheelhouse
       env:
-        CIBW_BEFORE_ALL: 'apt install libopenblas-dev libsuitesparse-dev libdsdp-dev libfftw3-dev libglpk-dev libgsl0-dev'
+        CIBW_BEFORE_ALL: 'apt-get install -y libopenblas-dev libsuitesparse-dev libdsdp-dev libfftw3-dev libglpk-dev libgsl0-dev'
 
     - name: Store wheels as build artifacts
       uses: actions/upload-artifact@v3
